@@ -85,15 +85,15 @@ spec:
                     - key: "app"
                       operator: In
                       values:
-                        - "{{ template "pulsar.name" . }}"
+                      - "{{ template "pulsar.name" . }}"
                     - key: "release"
                       operator: In
                       values:
-                        - {{ .Release.Name }}
+                      - {{ .Release.Name }}
                     - key: "component"
                       operator: In
                       values:
-                        - {{ .Values.proxy.component }}
+                      - {{ .Values.proxy.component }}
                 topologyKey: "kubernetes.io/hostname"
         {{ end }}
         {{- end }}
