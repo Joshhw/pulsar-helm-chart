@@ -8,8 +8,9 @@ metadata:
     "helm.sh/hook": pre-install
     "helm.sh/hook-weight": "1"
 rules:
-  resources: ["secrets"]
-  verbs: ["get", "list", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "create", "delete"]
   - apiGroups: [""]
     resources: ["namespace"]
     verbs: ["get", "list"]
