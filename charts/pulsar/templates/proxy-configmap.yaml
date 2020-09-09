@@ -27,7 +27,7 @@ metadata:
     {{- include "pulsar.standardLabels" . | nindent 4 }}
     component: {{ .Values.proxy.component }}
 data:
-  clusterName: {{ template "pulsar.fullname" . }}
+  clusterName: {{ template "pulsar.cluster.name" . }}
   httpNumThreads: "8"
   statusFilePath: "{{ template "pulsar.home" . }}/status"
   # prometheus needs to access /metrics endpoint
@@ -65,7 +65,7 @@ data:
   # disable authorization on proxy and forward authorization credentials to broker
   authorizationEnabled: "false"
   forwardAuthorizationCredentials: "true"
-  superUserRoles: {{ .Values.auth.superUsers.broker }},{{ .Values.auth.superUsers.proxy }},{{ .Values.auth.superUsers.client }},pulsar-admin-client
+  superUserRoles: {{ .Values.auth.superUsers.broker }},{{ .Values.auth.superUsers.proxy }},{{ .Values.auth.superUsers.client }}
   {{- end }}
   {{- if .Values.auth.authentication.providers }}
   authenticationProviders: "{{join "," .Values.auth.authentication.providers.classes  }}"
