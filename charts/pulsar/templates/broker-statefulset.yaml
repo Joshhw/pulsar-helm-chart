@@ -77,8 +77,8 @@ spec:
                 values:
                 - {{ .Values.broker.component }}
             topologyKey: "kubernetes.io/hostname"
-      {{ else }}
-      {{ .Values.broker.affinity.type }}:
+        {{ else }}
+          {{ .Values.broker.affinity.type }}:
             - weight: 100
               podAffinityTerm:
                 labelSelector:
@@ -86,15 +86,15 @@ spec:
                     - key: "app"
                       operator: In
                       values:
-                        - "{{ template "pulsar.name" . }}"
+                      - "{{ template "pulsar.name" . }}"
                     - key: "release"
                       operator: In
                       values:
-                        - {{ .Release.Name }}
+                      - {{ .Release.Name }}
                     - key: "component"
                       operator: In
                       values:
-                        - {{ .Values.broker.component }}
+                      - {{ .Values.broker.component }}
                 topologyKey: "kubernetes.io/hostname"
         {{ end }}
         {{- end }}
@@ -110,7 +110,8 @@ spec:
           - >-
             {{- include "pulsar.broker.zookeeper.tls.settings" . | nindent 12 }}
             {{- if .Values.pulsar_metadata.configurationStore }}
-            until bin/bookkeeper org.apache.zookeeper.ZooKeeperMain -server {{ template "pulsar.configurationStore.connect" . }} get {{ .Values.configurationStoreMetadataPrefix }}/admin/clusters/{{ template "pulsar.cluster.name" . }}; do            {{- end }}
+            until bin/bookkeeper org.apache.zookeeper.ZooKeeperMain -server {{ template "pulsar.configurationStore.connect" . }} get {{ .Values.configurationStoreMetadataPrefix }}/admin/clusters/{{ template "pulsar.cluster.name" . }}; do
+            {{- end }}
             {{- if not .Values.pulsar_metadata.configurationStore }}
             until bin/bookkeeper org.apache.zookeeper.ZooKeeperMain -server {{ template "pulsar.zookeeper.connect" . }} get {{ .Values.metadataPrefix }}/admin/clusters/{{ template "pulsar.cluster.name" . }}; do
             {{- end }}
