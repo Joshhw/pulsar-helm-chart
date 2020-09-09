@@ -13,5 +13,5 @@ rules:
     verbs: ["get", "list", "create", "delete"]
   - apiGroups: [""]
     resources: ["namespace"]
-    verbs: ["get", "list"]
+    verbs: ["get", "list", "create"]
 {{- end }}
